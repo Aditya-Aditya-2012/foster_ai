@@ -1,10 +1,18 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import TemplateList from "./components/TemplateList";
 import TemplateEditor from "./components/TemplateEditor";
 
 function App() {
-  const [templates, setTemplates] = useState([])
-  const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [templates, setTemplates] = useState(() => {
+    const storedTemplates = localStorage.getItem("templates");
+    return storedTemplates ? JSON.parse(storedTemplates) : [];
+  });
+
+  const [selectedTemplate, setSelectedTemplate] = useState(null)
+  
+  useEffect(() => {
+    localStorage.setItem("templates", JSON.stringify(templates));
+  }, [templates]);
 
   const handleSave = (newTemplate) => {
     setTemplates((prev) => {
