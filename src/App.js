@@ -16,8 +16,12 @@ function App() {
 
   const handleSave = (newTemplate) => {
     setTemplates((prev) => {
-      const updatedTemplates = [...prev, newTemplate];
-      localStorage.setItem("templates", JSON.stringify(updatedTemplates));
+      const updatedTemplates = prev.map((template) =>
+        template.title === newTemplate.title ? newTemplate : template
+      );
+      if(!updatedTemplates.some((t) => t.title === newTemplate.title)) {
+        updatedTemplates.push(newTemplate);
+      }
       return updatedTemplates;
     });
     setSelectedTemplate(null);
