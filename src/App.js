@@ -1,3 +1,4 @@
+import "./App.css";
 import React, {useState, useEffect} from "react";
 import TemplateList from "./components/TemplateList";
 import TemplateEditor from "./components/TemplateEditor";
